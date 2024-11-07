@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model College {
+  id       String   @id @default(uuid())
+  name     String
+  address  String
+  pincode  Int
+  courses  Course[]
+}
+
+model Course {
+  id        String     @id @default(uuid())
+  name      String
+  subname   String
+  years     Semester[]
+  collegeId String
+  college   College    @relation(fields: [collegeId], references: [id])
+}
+
+model Semester {
+  id        String    @id @default(uuid())
+  semNum    Int
+  sections  Section[]
+  courseId  String
+  course    Course    @relation(fields: [courseId], references: [id])
+}
+
+model Section {
+  id       String   @id @default(uuid())
+  name     String
+  groups   Group[]  
+  yearId   String
+  year     Semester @relation(fields: [yearId], references: [id])
+
+  @@unique([name, yearId])
+}
+
+model Group {
+  id           String    @id @default(uuid())
+  name         String
+  totalClasses Int       @default(0)
+  sectionId    String
+  students     Student[]
+  timetableId  String?
+  timetable    Timetable?
+  section      Section   @relation(fields: [sectionId], references: [id])
+
+  @@unique([name, sectionId])  // Ensure unique group names per section
+}
+
+model Timetable {
+  id         String   @id @default(uuid())
+  groupId    String?  @unique
+  teacherId  String?  @unique
+  class      Class[]
+  group      Group?   @relation(fields: [groupId], references: [id])
+  teacher    Teacher? @relation(fields: [teacherId], references: [id])
+}
+
+model Class {
+  id          String       @id @default(uuid())
+  day         Day
+  startTime   DateTime
+  endTime     DateTime
+  subjectId   String
+  subject     Subject      @relation(fields: [subjectId], references: [id])
+  attendance  Attendance[]
+  timetableId String
+  timetable   Timetable    @relation(fields: [timetableId], references: [id])
+}
+
+model Subject {
+  id       String   @id @default(uuid())
+  code     String
+  title    String
+  classes  Class[]
+  teachers Teacher[]
+}
+
+model Student {
+  enrollment   String      @id
+  name         String
+  username     String
+  password     String
+  totalAttended Int        @default(0)
+  group        Group       @relation(fields: [groupId], references: [id])
+  groupId      String
+  attendance   Attendance[]
+}
+
+model Teacher {
+  id       String   @id @default(uuid())
+  name     String
+  username String
+  password String
+  subjects  Subject[]
+  timetableId String?
+  timetable Timetable?
+}
+
+model Attendance {
+  id       String   @id @default(uuid())
+  isPresent Boolean
+  date      DateTime
+  classId   String
+  class     Class     @relation(fields: [classId], references: [id], onDelete: Cascade)
+  studentEnrollment String
+  student   Student   @relation(fields: [studentEnrollment], references: [enrollment], onDelete: Cascade)
+
+  @@index([studentEnrollment]) // Index for better lookup for student attendance
+}
+
+// Enum for Days of the Week
+enum Day {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
