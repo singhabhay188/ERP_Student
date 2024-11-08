@@ -142,3 +142,25 @@ export async function getCourseDetails(id: string) {
     if(!course) return null;
     return course;
 }
+
+export async function createSection(semesterId: string, name: string) {
+    if (!semesterId || !name) throw new Error('Semester ID and name are required');
+    
+    const existingSection = await prisma.section.findFirst({
+        where: {
+            yearId:semesterId,
+            name
+        }
+    });
+
+    if (existingSection) {
+        throw new Error('A section with this name already exists in this semester');
+    }
+
+    return await prisma.section.create({
+        data: {
+            name,
+            yearId: semesterId
+        }
+    });
+}

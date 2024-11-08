@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { PlusCircle } from 'lucide-react'
 import Link from 'next/link'
 import MessageDisplayer from '@/components/admin/MessageDisplayer'
+import { createSection } from '@/actions/admin'
+import AddSectionDialog from '@/components/admin/courses/AddSectionDialog'
 
 export default async function CourseDetails({ params }: { params: { id: string }}) {
   const course = await getCourseDetails(params.id);
@@ -47,21 +49,45 @@ export default async function CourseDetails({ params }: { params: { id: string }
           <Accordion type="single" collapsible className="w-full">
             {course.years.map((year) => (
               <AccordionItem key={year.id} value={year.id}>
-                <AccordionTrigger>Semester {year.semNum}</AccordionTrigger>
+                <AccordionTrigger>
+                  <div className="flex justify-between items-center w-full pr-4">
+                    <span>Semester {year.semNum}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {year.sections?.length || 0} Sections
+                    </span>
+                  </div>
+                </AccordionTrigger>
                 <AccordionContent>
-                  <div className="pl-4 space-y-2">
+                  <div className="pl-4 space-y-4">
                     <div className="flex justify-between items-center">
                       <h4 className="font-semibold">Sections</h4>
-                      <Button size="sm" variant="outline">
-                        <PlusCircle className="mr-2 h-4 w-4" /> Add Section
-                      </Button>
+                      <AddSectionDialog semesterId={year.id} />
                     </div>
-                    {year.sections?.map((section) => (
-                      <div key={section.id} className="flex justify-between items-center p-2 bg-secondary/20 rounded-md">
-                        <span>Section {section.name}</span>
-                        <Button size="sm" variant="link">View Details</Button>
+                    
+                    {year.sections?.length === 0 ? (
+                      <p className="text-sm text-muted-foreground">No sections found</p>
+                    ) : (
+                      <div className="grid gap-2">
+                        {year.sections?.map((section) => (
+                          <div 
+                            key={section.id} 
+                            className="flex justify-between items-center p-3 bg-secondary/20 rounded-md hover:bg-secondary/30 transition-colors"
+                          >
+                            <div>
+                              <span className="font-medium">Section {section.name}</span>
+                              <span className="text-sm text-muted-foreground ml-2">
+                                ({section.groups?.length || 0} Groups)
+                              </span>
+                            </div>
+                            <Button size="sm" variant="link" asChild>
+                              <Link href={`/admin/sections/${section.id}`}>
+                                View Details
+                              </Link>
+                            </Button>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    )}
                   </div>
                 </AccordionContent>
               </AccordionItem>
