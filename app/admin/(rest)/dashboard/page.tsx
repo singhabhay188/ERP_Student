@@ -1,12 +1,11 @@
 import Link from 'next/link'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, Users } from 'lucide-react'
 import { getDashboardData } from "@/actions/admin";
+import { COLLEGE_ID } from '@/lib/const';
 
 export default async function AdminDashboard() {
-  const collegeId = "f0eced64-b793-4294-ae81-3c5352656098";
-  const data = await getDashboardData(collegeId);
+  const data = await getDashboardData(COLLEGE_ID);
   if(!data || !data.college) return <div>Error Loading College Info</div>
 
 

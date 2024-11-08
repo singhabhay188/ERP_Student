@@ -1,4 +1,4 @@
-import { BASEURL } from "@/lib/url";
+import { BASEURL } from "@/lib/const";
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
