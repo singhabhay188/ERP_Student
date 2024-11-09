@@ -27,7 +27,7 @@ export default async function page() {
             </div>
             <div className='flex flex-col gap-4'>
                 {students.map((student) => (
-                    <div key={student.enrollment} className='border p-4 rounded-md'>
+                    <div key={student.enrollment} className='border border-gray-500 p-4 rounded-md'>
                         <h2 className='text-lg font-bold capitalize'>{student.name}</h2>
                         <p className='text-sm text-gray-500'>{student.enrollment}</p>
 

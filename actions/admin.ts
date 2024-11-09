@@ -1,7 +1,7 @@
 'use server';
 
 import prisma from "@/db";
-import { CourseFormData, StudentFormData } from "@/utils/types";
+import { CourseFormData, StudentFormData, TeacherFormData } from "@/utils/types";
 
 export async function adminSignIn({email,password}:{email:string,password:string}) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -190,6 +190,29 @@ export async function createStudent(data: StudentFormData) {
             password: data.password,
             collegeId: data.collegeId,
             totalAttended: 0  // Setting default value as per schema
+        }
+    });
+}
+
+export async function createTeacher(data: TeacherFormData) {
+    // Check for existing teacher with same username
+    const existingTeacher = await prisma.teacher.findFirst({
+        where: {
+            username: data.username.toLowerCase()
+        }
+    });
+
+    if (existingTeacher) {
+        throw new Error('A teacher with this email already exists');
+    }
+
+    // Create the teacher
+    return await prisma.teacher.create({
+        data: {
+            name: data.name.toLowerCase(),
+            username: data.username.toLowerCase(),
+            password: data.password,
+            collegeId: data.collegeId,
         }
     });
 }

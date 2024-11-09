@@ -11,3 +11,10 @@ export type StudentFormData = {
     name: string;
     collegeId: string;
 }
+
+export type TeacherFormData = {
+    name: string;
+    username: string;
+    password: string;
+    collegeId: string;
+}

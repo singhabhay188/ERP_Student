@@ -14,6 +14,7 @@ model College {
   pincode  Int
   courses  Course[]
   students Student[]
+  teachers Teacher[]
 }
 
 model Course {
@@ -103,6 +104,8 @@ model Teacher {
   username String
   password String
   subjects  Subject[]
+  collegeId    String
+  college      College     @relation(fields: [collegeId], references: [id])
   timetableId String?
   timetable Timetable?
 }
