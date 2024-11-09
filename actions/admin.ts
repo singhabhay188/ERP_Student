@@ -1,7 +1,7 @@
 'use server';
 
 import prisma from "@/db";
-import { CourseFormData } from "@/utils/types";
+import { CourseFormData, StudentFormData } from "@/utils/types";
 
 export async function adminSignIn({email,password}:{email:string,password:string}) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -75,52 +75,57 @@ export async function getDashboardData(collegeId: string) {
 }
 
 export async function createCourse(data: CourseFormData) {
-    data.name = data.name.toLowerCase();
-    data.subname = data.subname.toLowerCase();
+    try {
+        data.name = data.name.toLowerCase();
+        data.subname = data.subname.toLowerCase();
 
-    // Check for existing course with same name and subname
-    const existingCourse = await prisma.course.findFirst({
-        where: {
-            AND: [
-                { name: data.name },
-                { subname: data.subname },
-                { collegeId: data.collegeId }
-            ]
+        // Check for existing course
+        const existingCourse = await prisma.course.findFirst({
+            where: {
+                AND: [
+                    { name: data.name },
+                    { subname: data.subname },
+                    { collegeId: data.collegeId }
+                ]
+            }
+        });
+
+        if (existingCourse) {
+            throw new Error('A course with this name and subname already exists');
         }
-    });
 
-    if (existingCourse) {
-        throw new Error('A course with this name and subname already exists');
-    }
+        const totalSemesters = data.expectedYears * 2;
 
-    // Calculate total number of semesters (2 per year)
-    const totalSemesters = data.expectedYears * 2;
-
-    // Create course and semesters in a transaction
-    return await prisma.$transaction(async (tx) => {
-        // Create the course first
-        const course = await tx.course.create({
-            data: {
-                name: data.name,
-                subname: data.subname,
-                collegeId: data.collegeId,
-            },
-        });
-
-        // Create semesters for the course
-        const semesterPromises = Array.from({ length: totalSemesters }, (_, i) => {
-            return tx.semester.create({
+        // Create course and semesters in a transaction
+        const course = await prisma.$transaction(async (tx) => {
+            const course = await tx.course.create({
                 data: {
-                    semNum: i + 1,
-                    courseId: course.id,
-                }
+                    name: data.name,
+                    subname: data.subname,
+                    collegeId: data.collegeId,
+                },
             });
+
+            const semesterPromises = Array.from({ length: totalSemesters }, (_, i) => {
+                return tx.semester.create({
+                    data: {
+                        semNum: i + 1,
+                        courseId: course.id,
+                    }
+                });
+            });
+
+            await Promise.all(semesterPromises);
+            return course;
         });
 
-        await Promise.all(semesterPromises);
-
-        return course;
-    });
+        return { success: true, data: course };  // Explicit success response
+    } catch (error) {
+        if (error instanceof Error) {
+            throw error;
+        }
+        throw new Error('Failed to create course');
+    }
 }
 
 export async function getCourseDetails(id: string) {
@@ -161,6 +166,30 @@ export async function createSection(semesterId: string, name: string) {
         data: {
             name,
             yearId: semesterId
+        }
+    });
+}
+
+export async function createStudent(data: StudentFormData) {
+    // Check for existing student with same enrollment
+    const existingStudent = await prisma.student.findUnique({
+        where: {
+            enrollment: data.enrollment
+        }
+    });
+
+    if (existingStudent) {
+        throw new Error('A student with this enrollment number already exists');
+    }
+
+    // Create the student
+    return await prisma.student.create({
+        data: {
+            enrollment: data.enrollment,
+            name: data.name.toLowerCase(),
+            password: data.password,
+            collegeId: data.collegeId,
+            totalAttended: 0  // Setting default value as per schema
         }
     });
 }

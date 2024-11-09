@@ -13,6 +13,7 @@ model College {
   address  String
   pincode  Int
   courses  Course[]
+  students Student[]
 }
 
 model Course {
@@ -87,11 +88,12 @@ model Subject {
 model Student {
   enrollment   String      @id
   name         String
-  username     String
   password     String
   totalAttended Int        @default(0)
-  group        Group       @relation(fields: [groupId], references: [id])
-  groupId      String
+  group        Group?       @relation(fields: [groupId], references: [id])
+  groupId      String?
+  collegeId    String
+  college      College     @relation(fields: [collegeId], references: [id])
   attendance   Attendance[]
 }
 

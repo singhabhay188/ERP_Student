@@ -1,25 +1,26 @@
 import { useState } from "react";
 
-const useFetch = (cb) => {
-  const [data, setData] = useState(undefined);
+const useFetch = (asyncFunction: Function) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState(null);
 
-  const fn = async (...args) => {
+  const fn = async (...args: any) => {
     setLoading(true);
     setError(null);
-
     try {
-      const response = await cb(...args);
-      setData(response);
-    } catch (error) {
-      setError(error);
-    } finally {
+      const result = await asyncFunction(...args);
+      setData(result);
       setLoading(false);
+      return result;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      setLoading(false);
+      return null;
     }
   };
 
-  return { data, loading, error, fn };
+  return { loading, error, data, fn };
 };
 
 export default useFetch;

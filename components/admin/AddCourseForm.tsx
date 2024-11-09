@@ -21,13 +21,17 @@ const AddCourseForm = ({closeDrawer}:{closeDrawer:()=> void}) => {
     const { loading, error, fn: fetchCreateCourse, data } = useFetch(createCourse);
 
     const onSubmit = async (data: CourseFormData) => {
-        console.log(data)
-        await fetchCreateCourse(data);
-        console.log(data,error);
-        closeDrawer();
-        router.refresh();
+        try {
+            const result = await fetchCreateCourse(data);
+            
+            if (result) {
+                closeDrawer();
+                router.refresh();
+            }
+        } catch (err) {
+            console.error('Failed to create course:', err);
+        }
     }
-
 
     return (
         <div className="p-4 pb-0">
@@ -86,11 +90,17 @@ const AddCourseForm = ({closeDrawer}:{closeDrawer:()=> void}) => {
                     />
                 </div>
 
-                {!loading && error && <p className="text-red-500 text-sm text-center my-2">An Error Occured while Creating Course</p>}
-                <Button className="w-full" type="submit" disabled={loading}>{loading ? 'Creating...' : 'Create Course'}</Button>
+                {!loading && error && (
+                    <p className="text-red-500 text-sm text-center my-2">
+                        {error instanceof Error ? error.message : 'An error occurred while creating course'}
+                    </p>
+                )}
+                <Button className="w-full" type="submit" disabled={loading}>
+                    {loading ? 'Creating...' : 'Create Course'}
+                </Button>
             </form>
         </div>
-  )
+    )
 }
 
 export default AddCourseForm

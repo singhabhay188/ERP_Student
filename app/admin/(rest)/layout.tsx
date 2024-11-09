@@ -11,14 +11,14 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: MdDashboard },
-  { href: "/admin/courses", label: "Manage Courses", icon: PiStudent },
+  { href: "/admin/courses", label: "Manage Courses", icon: FaWpforms },
+  { href: "/admin/students", label: "Manage Students", icon: PiStudent },
   { href: "/admin/manageTeacher", label: "Manage Teacher", icon: GiTeacher },
   { href: "/admin/manageAttendance", label: "Attendance", icon: FaPeopleGroup },
   { href: "/admin/manageTimetable", label: "Timetable", icon: IoIosTime },
   { href: "/admin/manageNotices", label: "Notices", icon: FaPaperPlane },
   { href: "/admin/calendar", label: "Academic Calendar", icon: FaCalendarAlt },
   { href: "/admin/manageEvents", label: "Events", icon: MdOutlineEmojiEvents },
-  { href: "/admin/manageForms", label: "Forms", icon: FaWpforms },
 ];
 
 const AdminSidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
