@@ -7,28 +7,27 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { IoIosTime } from "react-icons/io";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: MdDashboard },
   { href: "/admin/courses", label: "Manage Courses", icon: FaWpforms },
   { href: "/admin/students", label: "Manage Students", icon: PiStudent },
-  { href: "/admin/manageTeacher", label: "Manage Teacher", icon: GiTeacher },
+  { href: "/admin/teachers", label: "Manage Teacher", icon: GiTeacher },
   { href: "/admin/subjects", label: "Subjects", icon: FaBook },
   { href: "/admin/manageAttendance", label: "Attendance", icon: FaPeopleGroup },
-  { href: "/admin/manageTimetable", label: "Timetable", icon: IoIosTime },
+  { href: "/admin/timetable", label: "Timetable", icon: IoIosTime },
   { href: "/admin/manageNotices", label: "Notices", icon: FaPaperPlane },
   { href: "/admin/calendar", label: "Academic Calendar", icon: FaCalendarAlt },
   { href: "/admin/manageEvents", label: "Events", icon: MdOutlineEmojiEvents },
 ];
 
 const AdminSidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
-  const [title, setTitle] = useState("Dashboard");
   const pathname = usePathname().split("/")[2];
 
   useEffect(() => {
     const matchedItem = navItems.find((item) => item.href.split("/")[2] === pathname);
-    setTitle(matchedItem ? matchedItem.label : "Dashboard");
+    let title = matchedItem ? matchedItem.label : "Dashboard";
     document.title = `Admin - ${title}`;
   }, [pathname]);
 
