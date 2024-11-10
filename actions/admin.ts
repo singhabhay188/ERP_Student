@@ -216,3 +216,28 @@ export async function createTeacher(data: TeacherFormData) {
         }
     });
 }
+
+export async function getSection(id: string) {
+    const section = await prisma.section.findUnique({
+        where: { id },
+        include: {
+            year: true,
+            groups: {
+                include: {
+                    students: true,
+                }
+            }
+        }
+    });
+    return section;
+}
+
+export async function createGroup(sectionId: string, name: string) {
+    const group = await prisma.group.create({
+        data: {
+            name,
+            sectionId,
+        }
+    });
+    return group;
+}
