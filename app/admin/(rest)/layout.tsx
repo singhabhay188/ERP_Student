@@ -2,7 +2,7 @@
 import { MdDashboard, MdOutlineEmojiEvents } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { GiTeacher } from "react-icons/gi";
-import { FaPaperPlane, FaCalendarAlt, FaWpforms } from "react-icons/fa";
+import { FaPaperPlane, FaCalendarAlt, FaWpforms, FaBook } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { IoIosTime } from "react-icons/io";
 import Link from "next/link";
@@ -14,6 +14,7 @@ const navItems = [
   { href: "/admin/courses", label: "Manage Courses", icon: FaWpforms },
   { href: "/admin/students", label: "Manage Students", icon: PiStudent },
   { href: "/admin/manageTeacher", label: "Manage Teacher", icon: GiTeacher },
+  { href: "/admin/subjects", label: "Subjects", icon: FaBook },
   { href: "/admin/manageAttendance", label: "Attendance", icon: FaPeopleGroup },
   { href: "/admin/manageTimetable", label: "Timetable", icon: IoIosTime },
   { href: "/admin/manageNotices", label: "Notices", icon: FaPaperPlane },

@@ -1,6 +1,7 @@
 import React from 'react'
 import prisma from '@/db'
 import { COLLEGE_ID } from '@/lib/const'
+import Image from 'next/image'
 import AddTeacher from '@/components/admin/AddTeacher'
 
 async function getTeachers() {
@@ -23,10 +24,23 @@ export default async function Page() {
             </div>
             <div className='flex flex-col gap-4'>
                 {teachers.map((teacher) => (
-                    <div key={teacher.id} className='border border-gray-500 p-4 rounded-md'>
-                        <h2 className='text-lg font-bold capitalize'>{teacher.name}</h2>
-                        <p className='text-sm text-gray-500'>Username: <span className='font-bold'>{teacher.username}</span></p>
+                    <div key={teacher.id} className='border border-gray-500 p-4 rounded-md flex items-center justify-between'>
+                        <div>
+                            <h2 className='text-lg font-bold capitalize'>{teacher.name}</h2>
+                            <p className='text-sm text-gray-500'>Username: <span className='font-bold'>{teacher.username}</span></p>
+                        </div>
+                        <div className='flex items-center gap-2'>
+                            <Image
+                                src={teacher.imageUrl || 'https://cdn-icons-png.flaticon.com/512/6858/6858504.png'}
+                                alt={'Teacher'}
+                                width={50}
+                                height={50}
+                                className="rounded-full"
+                                unoptimized
+                            />
+                        </div>
                     </div>
+
                 ))}
             </div>
         </div>

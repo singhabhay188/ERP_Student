@@ -10,6 +10,7 @@ export type StudentFormData = {
     password: string;
     name: string;
     collegeId: string;
+    imageUrl: string;
 }
 
 export type TeacherFormData = {
@@ -17,4 +18,5 @@ export type TeacherFormData = {
     username: string;
     password: string;
     collegeId: string;
+    imageUrl: string;
 }

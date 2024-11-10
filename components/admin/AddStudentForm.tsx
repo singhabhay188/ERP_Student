@@ -17,7 +17,8 @@ const AddStudentForm = ({closeDrawer}:{closeDrawer:()=> void}) => {
     const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<StudentFormData>({
         defaultValues: {
             collegeId: COLLEGE_ID,
-            password: ''
+            password: '',
+            imageUrl: 'https://cdn-icons-png.flaticon.com/512/6858/6858504.png'
         }
     });
 
@@ -30,7 +31,10 @@ const AddStudentForm = ({closeDrawer}:{closeDrawer:()=> void}) => {
 
     const onSubmit = async (data: StudentFormData) => {
         try {
-            const result = await fetchCreateStudent(data);
+            const result = await fetchCreateStudent({
+                ...data,
+                imageUrl: data.imageUrl || 'https://cdn-icons-png.flaticon.com/512/6858/6858504.png'
+            });
             if (result) {
                 closeDrawer();
                 router.refresh();
@@ -85,6 +89,16 @@ const AddStudentForm = ({closeDrawer}:{closeDrawer:()=> void}) => {
                         {...register("collegeId")}
                         disabled
                         value={COLLEGE_ID}
+                    />
+                </div>
+
+                <div className="space-y-2">
+                    <Label htmlFor="imageUrl">Profile Image URL</Label>
+                    <Input
+                        id="imageUrl"
+                        type="text"
+                        {...register("imageUrl")}
+                        placeholder="Enter image URL (optional)"
                     />
                 </div>
 

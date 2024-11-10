@@ -1,0 +1,32 @@
+import React from 'react'
+import AddSubject from '@/components/admin/AddSubject'
+import prisma from '@/db'
+
+export async function getSubjects() {
+    return await prisma.subject.findMany({
+        orderBy: {
+            code: 'asc'
+        }
+    });
+}
+
+export default async function page() {
+  const subjects = await getSubjects();
+
+  return (
+    <div className="container mx-auto p-6">
+        <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold">Subjects Overview</h1>
+            <AddSubject />
+        </div>
+        <div className='flex flex-col gap-4'>
+            {subjects.map((subject) => (
+                <div key={subject.id} className='border border-gray-500 p-4 rounded-md'>
+                    <h2 className='text-lg font-bold uppercase'>{subject.code}</h2>
+                    <p className='text-sm text-gray-500 capitalize'>{subject.title}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+)
+}

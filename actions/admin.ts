@@ -241,3 +241,24 @@ export async function createGroup(sectionId: string, name: string) {
     });
     return group;
 }
+
+export async function createSubject(data: { code: string; title: string }) {
+    // Check for existing subject with same code
+    const existingSubject = await prisma.subject.findFirst({
+        where: {
+            code: data.code.toUpperCase()
+        }
+    });
+
+    if (existingSubject) {
+        throw new Error('A subject with this code already exists');
+    }
+
+    // Create the subject
+    return await prisma.subject.create({
+        data: {
+            code: data.code.toUpperCase(),
+            title: data.title
+        }
+    });
+}

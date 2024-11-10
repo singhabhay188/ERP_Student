@@ -16,7 +16,8 @@ const AddTeacherForm = ({closeDrawer}:{closeDrawer:()=> void}) => {
     const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<TeacherFormData>({
         defaultValues: {
             collegeId: COLLEGE_ID,
-            password: ''
+            password: '',
+            imageUrl: 'https://cdn-icons-png.flaticon.com/512/6858/6858504.png'
         }
     });
 
