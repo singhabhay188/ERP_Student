@@ -12,6 +12,11 @@ const createDateTime = (timeStr: string) => {
   return date
 }
 
+const convertToIST = (utcDateString: string) => {
+  const utcDate = new Date(utcDateString);
+  return utcDate;
+};
+
 const TimetablePage = () => {
   const [selectedGroup, setSelectedGroup] = useState('')
   const [groups, setGroups] = useState<Group[]>([])
@@ -55,7 +60,9 @@ const TimetablePage = () => {
     const fetchTimetable = async () => {
       try {
         const res = await fetch(`/api/timetable?groupId=${selectedGroup}`)
-        const data = await res.json()
+        const data = await res.json();
+        
+        console.log('Raw data from API:', data);
         
         setTimetableData({})
         
@@ -63,17 +70,26 @@ const TimetablePage = () => {
           const formattedData: Record<string, Record<string, string>> = {}
           
           data.class.forEach((cls: any) => {
-            const startTime = new Date(cls.startTime).toLocaleTimeString('en-US', {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false
-            })
-            const endTime = new Date(cls.endTime).toLocaleTimeString('en-US', {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false
-            })
-            const timeKey = `${startTime} - ${endTime}`
+            // Convert UTC to IST by adding 5 hours and 30 minutes
+            const startDate = new Date(cls.startTime);
+            const endDate = new Date(cls.endTime);
+            
+            startDate.setHours(startDate.getUTCHours() + 5);
+            startDate.setMinutes(startDate.getUTCMinutes() + 30);
+            endDate.setHours(endDate.getUTCHours() + 5);
+            endDate.setMinutes(endDate.getUTCMinutes() + 30);
+
+            // Format times to match TIME_SLOTS exactly
+            const startHour = startDate.getHours();
+            const endHour = endDate.getHours();
+            
+            // const startTime = `${startHour > 12 ? startHour - 12 : startHour}:${startDate.getMinutes().toString().padStart(2, '0')}`;
+            // const endTime = `${endHour > 12 ? endHour - 12 : endHour}:${endDate.getMinutes().toString().padStart(2, '0')}`;
+
+            const startTime = `${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
+            const endTime = `${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
+
+            const timeKey = `${startTime}-${endTime}`;
             
             if (!formattedData[timeKey]) {
               formattedData[timeKey] = {}
@@ -104,17 +120,16 @@ const TimetablePage = () => {
       const classes = []
       
       for (const slot of TIME_SLOTS) {
-        if (!slot.isBreak) {
-          for (const day of WORKING_DAYS) {
-            const subjectId = timetableData[`${slot.start} - ${slot.end}`]?.[day]
-            if (subjectId) {
-              classes.push({
-                day,
-                startTime: createDateTime(slot.start),
-                endTime: createDateTime(slot.end),
-                subjectId
-              })
-            }
+        const timeKey = `${slot.start}-${slot.end}`
+        for (const day of WORKING_DAYS) {
+          const subjectId = timetableData[timeKey]?.[day]
+          if (subjectId) {
+            classes.push({
+              day,
+              startTime: createDateTime(slot.start),
+              endTime: createDateTime(slot.end),
+              subjectId
+            })
           }
         }
       }
@@ -182,35 +197,33 @@ const TimetablePage = () => {
               </thead>
               <tbody>
                 {TIME_SLOTS.map((slot, index) => (
-                  <tr key={index} className={slot.isBreak ? 'bg-gray-50' : ''}>
+                  <tr key={index}>
                     <td className="border p-2">
-                      {slot.label || `${slot.start} - ${slot.end}`}
+                      {`${slot.start} - ${slot.end}`}
                     </td>
                     {WORKING_DAYS.map((day) => (
                       <td key={day} className="border p-2">
-                        {!slot.isBreak && (
-                          <select
-                            className="w-full border p-1 rounded"
-                            value={timetableData[`${slot.start} - ${slot.end}`]?.[day] || ''}
-                            onChange={(e) => {
-                              const timeKey = `${slot.start} - ${slot.end}`
-                              setTimetableData(prev => ({
-                                ...prev,
-                                [timeKey]: {
-                                  ...prev[timeKey],
-                                  [day]: e.target.value
-                                }
-                              }))
-                            }}
-                          >
-                            <option value="">Select Subject</option>
-                            {subjects.map((subject) => (
-                              <option key={subject.id} value={subject.id}>
-                                {subject.code} - {subject.title}
-                              </option>
-                            ))}
-                          </select>
-                        )}
+                        <select
+                          className="w-full border p-1 rounded"
+                          value={timetableData[`${slot.start}-${slot.end}`]?.[day] || ''}
+                          onChange={(e) => {
+                            const timeKey = `${slot.start}-${slot.end}`
+                            setTimetableData(prev => ({
+                              ...prev,
+                              [timeKey]: {
+                                ...prev[timeKey],
+                                [day]: e.target.value
+                              }
+                            }))
+                          }}
+                        >
+                          <option value="">Select Subject</option>
+                          {subjects.map((subject) => (
+                            <option key={subject.id} value={subject.id}>
+                              {subject.code} - {subject.title}
+                            </option>
+                          ))}
+                        </select>
                       </td>
                     ))}
                   </tr>
