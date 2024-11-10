@@ -1,4 +1,4 @@
-export type CourseFormData ={
+export type CourseFormData = {
     name: string
     subname: string
     collegeId: string
@@ -19,4 +19,25 @@ export type TeacherFormData = {
     password: string;
     collegeId: string;
     imageUrl: string;
+}
+
+export type Subject = {
+    id: string
+    code: string
+    title: string
+}
+
+export type Group = {
+    id: string
+    name: string
+    section: {
+        name: string
+        year: {
+            semNum: number
+            course: {
+                name: string
+                subname: string
+            }
+        }
+    }
 }
