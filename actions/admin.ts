@@ -203,17 +203,31 @@ export async function createTeacher(data: TeacherFormData) {
     });
 
     if (existingTeacher) {
-        throw new Error('A teacher with this email already exists');
+        throw new Error('A teacher with this username already exists');
     }
 
-    // Create the teacher
-    return await prisma.teacher.create({
-        data: {
-            name: data.name.toLowerCase(),
-            username: data.username.toLowerCase(),
-            password: data.password,
-            collegeId: data.collegeId,
-        }
+    return await prisma.$transaction(async (tx) => {
+        // Create timetable first
+        const timetable = await tx.timetable.create({
+            data: {}
+        });
+
+        const teacher = await tx.teacher.create({
+            data: {
+                name: data.name.toLowerCase(),
+                username: data.username.toLowerCase(),
+                password: data.password,
+                collegeId: data.collegeId,
+                timetableId: timetable.id
+            }
+        });
+
+        await tx.timetable.update({
+            where: { id: timetable.id },
+            data: { teacherId: teacher.id }
+        });
+
+        return teacher;
     });
 }
 

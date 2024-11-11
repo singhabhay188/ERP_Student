@@ -23,7 +23,7 @@ export default async function Page() {
                 <AddTeacher />
             </div>
             <div className='flex flex-col gap-4'>
-                {teachers.map((teacher) => (
+                {teachers.length > 0 ? teachers.map((teacher) => (
                     <div key={teacher.id} className='border border-gray-500 p-4 rounded-md flex items-center justify-between'>
                         <div>
                             <h2 className='text-lg font-bold capitalize'>{teacher.name}</h2>
@@ -41,7 +41,7 @@ export default async function Page() {
                         </div>
                     </div>
 
-                ))}
+                )) : <p className='text-center text-lg mt-4'>No teachers Exists</p>}
             </div>
         </div>
     )
