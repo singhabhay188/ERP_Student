@@ -15,7 +15,7 @@ const navItems = [
   { href: "/admin/students", label: "Manage Students", icon: PiStudent },
   { href: "/admin/teachers", label: "Manage Teacher", icon: GiTeacher },
   { href: "/admin/subjects", label: "Subjects", icon: FaBook },
-  { href: "/admin/manageAttendance", label: "Attendance", icon: FaPeopleGroup },
+  { href: "/admin/assignGroup", label: "Assign Group", icon: FaPeopleGroup },
   { href: "/admin/timetable", label: "Timetable", icon: IoIosTime },
   { href: "/admin/manageNotices", label: "Notices", icon: FaPaperPlane },
   { href: "/admin/calendar", label: "Academic Calendar", icon: FaCalendarAlt },
