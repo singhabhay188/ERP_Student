@@ -76,6 +76,8 @@ model Class {
   attendance  Attendance[]
   timetableId String
   timetable   Timetable    @relation(fields: [timetableId], references: [id])
+  teacherId String?
+  teacher Teacher? @relation(fields: [teacherId], references: [id])
 }
 
 model Subject {
@@ -110,6 +112,7 @@ model Teacher {
   timetableId String?
   timetable Timetable?
   imageUrl String?
+  classes Class[]
 }
 
 model Attendance {
