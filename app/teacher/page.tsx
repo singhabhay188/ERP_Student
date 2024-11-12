@@ -1,11 +1,5 @@
-import React from 'react'
-
-const page = () => {
-  return (
-    <div>
-        <h1>Teacher</h1>
-    </div>
-  )
+export default function TeacherDashboard(){
+  return <div className="p-8">
+    <h1>Teacher Dashboard</h1>
+  </div>
 }
-
-export default page

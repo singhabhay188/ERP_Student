@@ -41,3 +41,8 @@ export type Group = {
         }
     }
 }
+
+export type Teacher = {
+    id: string;
+    name: string;
+} 

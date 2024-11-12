@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { TIME_SLOTS, WORKING_DAYS } from '@/utils/const'
-import { Group, Subject } from '@/utils/types'
+import { Group, Subject, Teacher } from '@/utils/types'
 
 
 const createDateTime = (timeStr: string) => {
@@ -12,10 +12,25 @@ const createDateTime = (timeStr: string) => {
   return date
 }
 
-const convertToIST = (utcDateString: string) => {
-  const utcDate = new Date(utcDateString);
-  return utcDate;
-};
+const formatTimeAndIST = (sT: string, eT: string) => {
+  //India time = UTC + 5:30 ( 5.30 ghante aage than database time)
+  const startDate = new Date(sT);
+  const endDate = new Date(eT);
+  
+  startDate.setHours(startDate.getUTCHours() + 5);
+  startDate.setMinutes(startDate.getUTCMinutes() + 30);
+  endDate.setHours(endDate.getUTCHours() + 5);
+  endDate.setMinutes(endDate.getUTCMinutes() + 30);
+
+  // Format times to match TIME_SLOTS exactly
+  const startHour = startDate.getHours();
+  const endHour = endDate.getHours();
+
+  const startTime = `${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
+  const endTime = `${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
+
+  return {startTime, endTime}
+}
 
 const TimetablePage = () => {
   const [selectedGroup, setSelectedGroup] = useState('')
@@ -24,6 +39,8 @@ const TimetablePage = () => {
   const [timetableData, setTimetableData] = useState<Record<string, Record<string, string>>>({})
   const [loading, setLoading] = useState(false)
   const [initialLoading, setInitialLoading] = useState(true)
+  const [teachers, setTeachers] = useState<Record<string, Teacher[]>>({})
+  const [selectedTeachers, setSelectedTeachers] = useState<Record<string, Record<string, string>>>({})
 
   // Fetch groups and subjects
   useEffect(() => {
@@ -49,7 +66,7 @@ const TimetablePage = () => {
     fetchData()
   }, [])
 
-  // Fetch timetable when group is selected
+  // We will fetch new timetable when group is selected
   useEffect(() => {
     if (!selectedGroup) {
       setTimetableData({})
@@ -70,24 +87,7 @@ const TimetablePage = () => {
           const formattedData: Record<string, Record<string, string>> = {}
           
           data.class.forEach((cls: any) => {
-            // Convert UTC to IST by adding 5 hours and 30 minutes
-            const startDate = new Date(cls.startTime);
-            const endDate = new Date(cls.endTime);
-            
-            startDate.setHours(startDate.getUTCHours() + 5);
-            startDate.setMinutes(startDate.getUTCMinutes() + 30);
-            endDate.setHours(endDate.getUTCHours() + 5);
-            endDate.setMinutes(endDate.getUTCMinutes() + 30);
-
-            // Format times to match TIME_SLOTS exactly
-            const startHour = startDate.getHours();
-            const endHour = endDate.getHours();
-            
-            // const startTime = `${startHour > 12 ? startHour - 12 : startHour}:${startDate.getMinutes().toString().padStart(2, '0')}`;
-            // const endTime = `${endHour > 12 ? endHour - 12 : endHour}:${endDate.getMinutes().toString().padStart(2, '0')}`;
-
-            const startTime = `${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
-            const endTime = `${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
+            const {startTime, endTime} = formatTimeAndIST(cls.startTime, cls.endTime);
 
             const timeKey = `${startTime}-${endTime}`;
             
@@ -109,6 +109,19 @@ const TimetablePage = () => {
     fetchTimetable()
   }, [selectedGroup])
 
+  const fetchTeachersForSubject = async (subjectId: string) => {
+    try {
+      const res = await fetch(`/api/teachers?subjectId=${subjectId}`)
+      const teachersData = await res.json()
+      setTeachers(prev => ({
+        ...prev,
+        [subjectId]: teachersData
+      }))
+    } catch (error) {
+      toast.error('Failed to fetch teachers')
+    }
+  }
+
   const handleSave = async () => {
     if (!selectedGroup) {
       toast.error('Please select a group')
@@ -123,12 +136,14 @@ const TimetablePage = () => {
         const timeKey = `${slot.start}-${slot.end}`
         for (const day of WORKING_DAYS) {
           const subjectId = timetableData[timeKey]?.[day]
+          const teacherId = selectedTeachers[timeKey]?.[day]
           if (subjectId) {
             classes.push({
               day,
               startTime: createDateTime(slot.start),
               endTime: createDateTime(slot.end),
-              subjectId
+              subjectId,
+              teacherId: teacherId || null
             })
           }
         }
@@ -203,27 +218,57 @@ const TimetablePage = () => {
                     </td>
                     {WORKING_DAYS.map((day) => (
                       <td key={day} className="border p-2">
-                        <select
-                          className="w-full border p-1 rounded"
-                          value={timetableData[`${slot.start}-${slot.end}`]?.[day] || ''}
-                          onChange={(e) => {
-                            const timeKey = `${slot.start}-${slot.end}`
-                            setTimetableData(prev => ({
-                              ...prev,
-                              [timeKey]: {
-                                ...prev[timeKey],
-                                [day]: e.target.value
+                        <div className="space-y-2">
+                          <select
+                            className="w-full border p-1 rounded"
+                            value={timetableData[`${slot.start}-${slot.end}`]?.[day] || ''}
+                            onChange={(e) => {
+                              const timeKey = `${slot.start}-${slot.end}`
+                              const subjectId = e.target.value
+                              setTimetableData(prev => ({
+                                ...prev,
+                                [timeKey]: {
+                                  ...prev[timeKey],
+                                  [day]: subjectId
+                                }
+                              }))
+                              if (subjectId) {
+                                fetchTeachersForSubject(subjectId)
                               }
-                            }))
-                          }}
-                        >
-                          <option value="">Select Subject</option>
-                          {subjects.map((subject) => (
-                            <option key={subject.id} value={subject.id}>
-                              {subject.code} - {subject.title}
-                            </option>
-                          ))}
-                        </select>
+                            }}
+                          >
+                            <option value="">Select Subject</option>
+                            {subjects.map((subject) => (
+                              <option key={subject.id} value={subject.id}>
+                                {subject.code} - {subject.title}
+                              </option>
+                            ))}
+                          </select>
+                          
+                          {timetableData[`${slot.start}-${slot.end}`]?.[day] && (
+                            <select
+                              className="w-full border p-1 rounded"
+                              value={selectedTeachers[`${slot.start}-${slot.end}`]?.[day] || ''}
+                              onChange={(e) => {
+                                const timeKey = `${slot.start}-${slot.end}`
+                                setSelectedTeachers(prev => ({
+                                  ...prev,
+                                  [timeKey]: {
+                                    ...prev[timeKey],
+                                    [day]: e.target.value
+                                  }
+                                }))
+                              }}
+                            >
+                              <option value="">Select Teacher</option>
+                              {teachers[timetableData[`${slot.start}-${slot.end}`]?.[day]]?.map((teacher) => (
+                                <option key={teacher.id} value={teacher.id}>
+                                  {teacher.name}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                        </div>
                       </td>
                     ))}
                   </tr>
