@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import prisma from '@/db'
+import { useParams } from 'next/navigation'
 
 export async function GET(
   request: Request,
@@ -14,8 +15,10 @@ export async function GET(
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
+    const { classId } = await params
+
     const classData = await prisma.class.findUnique({
-      where: { id: params.classId },
+      where: { id:classId },
       include: {
         subject: true,
         timetable: {

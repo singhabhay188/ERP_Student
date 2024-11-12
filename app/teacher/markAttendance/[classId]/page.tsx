@@ -22,6 +22,7 @@ interface ClassData {
   startTime: string
   timetable: {
     group: {
+      id:string
       name: string
       students: Student[]
     }
@@ -37,6 +38,7 @@ const MarkAttendancePage = () => {
 
   const params = useParams<{ classId: string }>();
   const classId = params.classId;
+  console.log(classId);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -81,7 +83,8 @@ const MarkAttendancePage = () => {
         },
         body: JSON.stringify({
           classId: classId,
-          attendance
+          attendance,
+          groupId: classData.timetable.group.id
         }),
       })
       
