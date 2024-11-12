@@ -17,3 +17,9 @@ export const WORKING_DAYS = [
     Day.THURSDAY,
     Day.FRIDAY,
 ]
+
+export const getTodayDay = ()=>{
+  const todayIndex = new Date().getDay();
+  const dayArray = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+  return dayArray[todayIndex];
+};
