@@ -137,15 +137,14 @@ const TimetablePage = () => {
         for (const day of WORKING_DAYS) {
           const subjectId = timetableData[timeKey]?.[day]
           const teacherId = selectedTeachers[timeKey]?.[day]
-          if (subjectId) {
-            classes.push({
-              day,
-              startTime: createDateTime(slot.start),
-              endTime: createDateTime(slot.end),
-              subjectId,
-              teacherId: teacherId || null
-            })
-          }
+          if(!teacherId || !subjectId) continue;
+          classes.push({
+            day,
+            startTime: createDateTime(slot.start),
+            endTime: createDateTime(slot.end),
+            subjectId,
+            teacherId
+          });
         }
       }
 

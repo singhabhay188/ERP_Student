@@ -21,10 +21,14 @@ export async function POST(request: NextRequest) {
         include: { class: true }
       })
 
+      //if timetable is found we will delete first the classes then timetable
       if (existingTimetable) {
         await tx.class.deleteMany({
           where: { timetableId: existingTimetable.id }
-        })
+        });
+        await tx.timetable.delete({
+          where: { id: existingTimetable.id }
+        });
       }
 
       // Create or update group's timetable
@@ -32,29 +36,20 @@ export async function POST(request: NextRequest) {
         where: { groupId },
         create: { groupId },
         update: {}
-      })
+      });
 
       // Create classes and update teacher timetables
       for (const classData of classes) {
         const { teacherId, ...classDetails } = classData
 
-        // Create the class with direct teacherId connection
+        // Create single class with just group timetable and teacher reference
         const newClass = await tx.class.create({
           data: {
             ...classDetails,
-            timetableId: groupTimetable.id,
-            teacherId: teacherId || null  // Explicitly set teacherId
+            timetableId: groupTimetable.id,  // Link to group's timetable
+            teacherId: teacherId             // Direct link to teacher
           }
         })
-
-        // Create or update teacher's timetable if teacherId exists
-        if (teacherId) {
-          const teacherTimetable = await tx.timetable.upsert({
-            where: { teacherId },
-            create: { teacherId },
-            update: {}
-          })
-        }
       }
     })
 

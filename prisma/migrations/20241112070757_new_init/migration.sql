@@ -54,7 +54,6 @@ CREATE TABLE "Group" (
 CREATE TABLE "Timetable" (
     "id" TEXT NOT NULL,
     "groupId" TEXT,
-    "teacherId" TEXT,
 
     CONSTRAINT "Timetable_pkey" PRIMARY KEY ("id")
 );
@@ -67,6 +66,7 @@ CREATE TABLE "Class" (
     "endTime" TIMESTAMP(3) NOT NULL,
     "subjectId" TEXT NOT NULL,
     "timetableId" TEXT NOT NULL,
+    "teacherId" TEXT,
 
     CONSTRAINT "Class_pkey" PRIMARY KEY ("id")
 );
@@ -84,10 +84,11 @@ CREATE TABLE "Subject" (
 CREATE TABLE "Student" (
     "enrollment" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "totalAttended" INTEGER NOT NULL DEFAULT 0,
-    "groupId" TEXT NOT NULL,
+    "groupId" TEXT,
+    "collegeId" TEXT NOT NULL,
+    "imageUrl" TEXT,
 
     CONSTRAINT "Student_pkey" PRIMARY KEY ("enrollment")
 );
@@ -98,7 +99,8 @@ CREATE TABLE "Teacher" (
     "name" TEXT NOT NULL,
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "timetableId" TEXT,
+    "collegeId" TEXT NOT NULL,
+    "imageUrl" TEXT,
 
     CONSTRAINT "Teacher_pkey" PRIMARY KEY ("id")
 );
@@ -130,9 +132,6 @@ CREATE UNIQUE INDEX "Group_name_sectionId_key" ON "Group"("name", "sectionId");
 CREATE UNIQUE INDEX "Timetable_groupId_key" ON "Timetable"("groupId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Timetable_teacherId_key" ON "Timetable"("teacherId");
-
--- CreateIndex
 CREATE INDEX "Attendance_studentEnrollment_idx" ON "Attendance"("studentEnrollment");
 
 -- CreateIndex
@@ -157,16 +156,22 @@ ALTER TABLE "Group" ADD CONSTRAINT "Group_sectionId_fkey" FOREIGN KEY ("sectionI
 ALTER TABLE "Timetable" ADD CONSTRAINT "Timetable_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "Group"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Timetable" ADD CONSTRAINT "Timetable_teacherId_fkey" FOREIGN KEY ("teacherId") REFERENCES "Teacher"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Class" ADD CONSTRAINT "Class_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "Subject"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Class" ADD CONSTRAINT "Class_timetableId_fkey" FOREIGN KEY ("timetableId") REFERENCES "Timetable"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Student" ADD CONSTRAINT "Student_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "Group"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Class" ADD CONSTRAINT "Class_teacherId_fkey" FOREIGN KEY ("teacherId") REFERENCES "Teacher"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Student" ADD CONSTRAINT "Student_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "Group"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Student" ADD CONSTRAINT "Student_collegeId_fkey" FOREIGN KEY ("collegeId") REFERENCES "College"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Teacher" ADD CONSTRAINT "Teacher_collegeId_fkey" FOREIGN KEY ("collegeId") REFERENCES "College"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Attendance" ADD CONSTRAINT "Attendance_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE CASCADE ON UPDATE CASCADE;

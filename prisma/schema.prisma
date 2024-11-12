@@ -60,10 +60,8 @@ model Group {
 model Timetable {
   id         String   @id @default(uuid())
   groupId    String?  @unique
-  teacherId  String?  @unique
   class      Class[]
   group      Group?   @relation(fields: [groupId], references: [id])
-  teacher    Teacher? @relation(fields: [teacherId], references: [id])
 }
 
 model Class {
@@ -109,8 +107,6 @@ model Teacher {
   subjects  Subject[]
   collegeId    String
   college      College     @relation(fields: [collegeId], references: [id])
-  timetableId String?
-  timetable Timetable?
   imageUrl String?
   classes Class[]
 }

@@ -195,40 +195,33 @@ export async function createStudent(data: StudentFormData) {
 }
 
 export async function createTeacher(data: TeacherFormData) {
-    // Check for existing teacher with same username
-    const existingTeacher = await prisma.teacher.findFirst({
-        where: {
-            username: data.username.toLowerCase()
-        }
-    });
-
-    if (existingTeacher) {
-        throw new Error('A teacher with this username already exists');
-    }
-
-    return await prisma.$transaction(async (tx) => {
-        // Create timetable first
-        const timetable = await tx.timetable.create({
-            data: {}
+    try{
+        // Check for existing teacher with same username
+        const existingTeacher = await prisma.teacher.findFirst({
+            where: {
+                username: data.username.toLowerCase()
+            }
         });
-
-        const teacher = await tx.teacher.create({
+    
+        if (existingTeacher) {
+            throw new Error('A teacher with this username already exists');
+        }
+         
+        const teacher = await prisma.teacher.create({
             data: {
                 name: data.name.toLowerCase(),
                 username: data.username.toLowerCase(),
                 password: data.password,
-                collegeId: data.collegeId,
-                timetableId: timetable.id
+                collegeId: data.collegeId
             }
         });
 
-        await tx.timetable.update({
-            where: { id: timetable.id },
-            data: { teacherId: teacher.id }
-        });
-
         return teacher;
-    });
+    }
+    catch(error){
+        if(error instanceof Error) throw error;
+        throw new Error('Failed to create teacher');
+    }
 }
 
 export async function getSection(id: string) {
@@ -247,13 +240,35 @@ export async function getSection(id: string) {
 }
 
 export async function createGroup(sectionId: string, name: string) {
-    const group = await prisma.group.create({
-        data: {
-            name,
-            sectionId,
-        }
-    });
-    return group;
+    try{
+        return await prisma.$transaction(async (tx) => {
+
+            //first create time table
+            const timetable = await tx.timetable.create({
+                data: {}
+            });
+
+            //now create a group
+            const group = await tx.group.create({
+                data: {
+                    name,
+                    sectionId,
+                    timetableId: timetable.id
+                }
+            });
+
+            //now update the timetable with group id
+            await tx.timetable.update({
+                where: { id: timetable.id },
+                data: { groupId: group.id }
+            });
+            return group;
+        });
+    }
+    catch(error){
+        if(error instanceof Error) throw error;
+        throw new Error('Failed to create group');
+    }
 }
 
 export async function createSubject(data: { code: string; title: string }) {
