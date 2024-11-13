@@ -3,18 +3,6 @@ import { redirect } from 'next/navigation'
 import { format } from 'date-fns'
 
 export default async function Events() {
-  const cookieStore = await cookies()
-  const userCookie = cookieStore.get('user')
-  
-  if (!userCookie) {
-    redirect('/login')
-  }
-
-  const userData = JSON.parse(userCookie.value)
-  if (userData.type !== 'teacher') {
-    redirect('/')
-  }
-
   // Sample events data (in a real app, this would come from the database)
   const events = [
     {

@@ -2,18 +2,6 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 export default async function AcademicCalendar() {
-  const cookieStore = await cookies()
-  const userCookie = cookieStore.get('user')
-  
-  if (!userCookie) {
-    redirect('/login')
-  }
-
-  const userData = JSON.parse(userCookie.value)
-  if (userData.type !== 'teacher') {
-    redirect('/')
-  }
-
   // Sample calendar events (in a real app, this would come from the database)
   const events = [
     {
