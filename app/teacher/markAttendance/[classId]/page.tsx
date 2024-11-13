@@ -12,6 +12,7 @@ import toast from 'react-hot-toast'
 interface Student {
     enrollment: string,
     name: string
+    imageUrl: string
 }
 
 interface ClassData {
@@ -115,6 +116,9 @@ const MarkAttendancePage = () => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Image
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Roll No
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -128,6 +132,11 @@ const MarkAttendancePage = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {classData.timetable.group.students.map((student) => (
               <tr key={student.enrollment}>
+                <td className='flex items-center h-full justify-center'>
+                  <div className="w-[40px] h-[40px] mt-2 rounded-full overflow-hidden">
+                  <img src={student.imageUrl} className='' alt="Student Image" />
+                  </div>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {student.enrollment}
                 </td>
