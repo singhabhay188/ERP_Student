@@ -23,7 +23,7 @@ export default function page() {
     const formData = new FormData(event.currentTarget);
     
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('/api/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,13 +39,17 @@ export default function page() {
       });
 
       const data = await response.json();
+
+      console.log(data);
+      return;
       
       if (response.ok) {
         localStorage.setItem('user', JSON.stringify({
           type: data.type,
           id: data.id
         }));
-        // Redirect based on user type
+
+        // WE WILL SEND TO CORESPONDNG DASHBOARD
         window.location.href = `/${data.type}/dashboard`;
       } else {
         alert(data.message || 'Login failed');

@@ -1,19 +1,48 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/db";
 
 export const GET = () => {
     return NextResponse.json({message: 'Hello world'});
 }
 
 export const POST = async (req: NextRequest) => {
-    try{
+    try {
         const body = await req.json();
-    
-        if (body.username === 'admin' && body.password === 'admin') {
-            return NextResponse.json({user:{id: 1, name: 'J Smith', email: ''}});
+        const { enrollment='', username='', password = '', type='' } = body;
+
+        let user = null;
+        let id = '';
+
+        if (type === 'student') {
+            user = await prisma.student.findUnique({
+                where: { enrollment,password }
+            });
+            console.log(user);
+            if(user) id = user.enrollment;
         }
-        throw new Error('Invalid credentials');
+        else if (type === 'teacher') {
+            user = await prisma.teacher.findFirst({
+                where: { username,password }
+            });
+            if(user) id = user.id;
+        }
+        else if (type === 'admin') {
+            if(username==='admin@gmail.com' && password==='admin123'){
+                user = { id:'aVerySecretAdminId' }
+                id = user.id;
+            }
+        }
+        else {
+            return NextResponse.json({ error: 'Invalid user type' }, { status: 400 });
+        }
+
+        if (!user || user.password !== password) {
+            return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+        }
+
+        return NextResponse.json({ id, type });
     }
-    catch(e){
-        return NextResponse.json({error: 'Invalid credentials or Server Error'}, {status: 401});
+    catch (e) {
+        return NextResponse.json({ error: 'Server Error' }, { status: 500 });
     }
 }
