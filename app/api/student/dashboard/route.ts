@@ -1,10 +1,16 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/db'
+import { cookies } from 'next/headers';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    // here we are using fixed enrollment
-    const enrollment = "10525502721"
+    const cookieStore = await cookies();
+    const user = JSON.parse(cookieStore.get('user')?.value || '{}');
+    
+    if(!user || user.type !== 'student') {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    const enrollment = user.id;
 
     const student = await prisma.student.findUnique({
       where: {

@@ -16,10 +16,19 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { useState } from "react"
 
 export default function page() {
+  const [loading, setLoading] = useState(false);
+  if(localStorage.getItem('user')){
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+    window.location.href = `/${user.type}/dashboard`;
+  }
+
   const handleSubmit = async (type: 'admin' | 'teacher' | 'student', event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if(loading) return;
+    setLoading(true);
     const formData = new FormData(event.currentTarget);
     
     try {
@@ -41,7 +50,6 @@ export default function page() {
       const data = await response.json();
 
       console.log(data);
-      return;
       
       if (response.ok) {
         localStorage.setItem('user', JSON.stringify({
@@ -56,6 +64,8 @@ export default function page() {
       }
     } catch (error) {
       alert('An error occurred during login');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -99,7 +109,7 @@ export default function page() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button type="submit" className="w-full">Sign In</Button>
+                <Button type="submit" className="w-full" disabled={loading}>{loading ? 'Signing In...' : 'Sign In'}</Button>
               </CardFooter>
             </form>
           </Card>
@@ -135,7 +145,7 @@ export default function page() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button type="submit" className="w-full">Sign In</Button>
+                <Button type="submit" className="w-full" disabled={loading}>{loading ? 'Signing In...' : 'Sign In'}</Button>
               </CardFooter>
             </form>
           </Card>
@@ -171,7 +181,7 @@ export default function page() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button type="submit" className="w-full">Sign In</Button>
+                <Button type="submit" className="w-full" disabled={loading}>{loading ? 'Signing In...' : 'Sign In'}</Button>
               </CardFooter>
             </form>
           </Card>

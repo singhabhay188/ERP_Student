@@ -36,11 +36,15 @@ export const POST = async (req: NextRequest) => {
             return NextResponse.json({ error: 'Invalid user type' }, { status: 400 });
         }
 
-        if (!user || user.password !== password) {
+        console.log(user);
+
+        if (!user) {
             return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
         }
 
-        return NextResponse.json({ id, type });
+        const response = NextResponse.json({ id, type });
+        response.cookies.set('user', JSON.stringify({ id, type }));
+        return response;
     }
     catch (e) {
         return NextResponse.json({ error: 'Server Error' }, { status: 500 });

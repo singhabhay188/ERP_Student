@@ -34,7 +34,6 @@ const AdminSidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => 
   return (
     <>
       <div className="flex h-screen">
-        {/* Sidebar */}
         <aside className="hidden md:block h-full border-r-2 border-blue-100 bg-gray-200 p-2">
           <nav className="mt-8">
             <ul className="space-y-1">
@@ -56,13 +55,11 @@ const AdminSidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => 
           </nav>
         </aside>
 
-        {/* Main Content Area */}
         <main className="flex-1 overflow-y-auto p-3 bg-blue-50">
           {children}
         </main>
       </div>
 
-      {/* Mobile Navigation */}
       <nav className="mt-8 md:hidden border-t-2 border-blue-100 bg-white fixed bottom-0 left-0 right-0 overflow-x-auto">
         <ul className="flex gap-2 justify-between">
           {navItems.map((item, ind) => {
