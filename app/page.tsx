@@ -20,10 +20,6 @@ import { useState } from "react"
 
 export default function page() {
   const [loading, setLoading] = useState(false);
-  if(localStorage.getItem('user')){
-    let user = JSON.parse(localStorage.getItem('user') || '{}');
-    window.location.href = `/${user.type}/dashboard`;
-  }
 
   const handleSubmit = async (type: 'admin' | 'teacher' | 'student', event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
