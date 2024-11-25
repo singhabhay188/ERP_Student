@@ -12,15 +12,18 @@ import { PlusCircle } from "lucide-react"
 import { useState } from "react"
 import { createGroup } from "@/actions/admin" // You'll need to create this action
 import { useRouter } from "next/navigation"
+import useFetch from "@/hooks/useFetch"
 
 export default function AddGroupDialog({ sectionId }: { sectionId: string }) {
   const [open, setOpen] = useState(false)
   const [groupName, setGroupName] = useState("")
   const router = useRouter()
 
+  const { loading, error, fn: fetchCreateGroup, data } = useFetch(createGroup);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    await createGroup(sectionId, groupName)
+    await fetchCreateGroup(sectionId, groupName);
     setGroupName("")
     setOpen(false)
     router.refresh()
@@ -43,7 +46,7 @@ export default function AddGroupDialog({ sectionId }: { sectionId: string }) {
             value={groupName}
             onChange={(e) => setGroupName(e.target.value)}
           />
-          <Button type="submit">Create Group</Button>
+          <Button type="submit" disabled={loading}>{loading ? 'Creating Group' : 'Create Group'}</Button>
         </form>
       </DialogContent>
     </Dialog>

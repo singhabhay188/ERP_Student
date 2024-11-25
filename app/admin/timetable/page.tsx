@@ -66,49 +66,6 @@ const TimetablePage = () => {
     fetchData()
   }, [])
 
-  // We will fetch new timetable when group is selected
-  useEffect(() => {
-    if (!selectedGroup) {
-      setTimetableData({})
-      return
-    }
-
-    setLoading(true)
-    const fetchTimetable = async () => {
-      try {
-        const res = await fetch(`/api/timetable?groupId=${selectedGroup}`)
-        const data = await res.json();
-        
-        console.log('Raw data from API:', data);
-        
-        setTimetableData({})
-        
-        if (data?.class) {
-          const formattedData: Record<string, Record<string, string>> = {}
-          
-          data.class.forEach((cls: any) => {
-            const {startTime, endTime} = formatTimeAndIST(cls.startTime, cls.endTime);
-
-            const timeKey = `${startTime}-${endTime}`;
-            
-            if (!formattedData[timeKey]) {
-              formattedData[timeKey] = {}
-            }
-            formattedData[timeKey][cls.day] = cls.subject.id
-          })
-          
-          setTimetableData(formattedData)
-        }
-      } catch (error) {
-        toast.error('Failed to fetch timetable')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchTimetable()
-  }, [selectedGroup])
-
   const fetchTeachersForSubject = async (subjectId: string) => {
     try {
       const res = await fetch(`/api/teachers?subjectId=${subjectId}`)
@@ -190,7 +147,7 @@ const TimetablePage = () => {
               <option value="">Select Group</option>
               {groups.map((group) => (
                 <option key={group.id} value={group.id}>
-                  {group.section.year.course.name} - {group.section.year.course.subname || ''} - Year {group.section.year.semNum} - {group.section.name} - {group.name}
+                  {group.section.year.course.name} - {group.section.year.course.subname || ''} - Sem {group.section.year.semNum} - {group.section.name} - {group.name}
                 </option>
               ))}
             </select>
