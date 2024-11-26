@@ -147,8 +147,9 @@ const TimetablePage = () => {
           });
         }
       }
+      console.log(selectedGroup);
 
-      await fetch('/api/timetable', {
+      const data = await fetch('/api/timetable', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -156,7 +157,12 @@ const TimetablePage = () => {
         body: JSON.stringify({ groupId: selectedGroup, classes })
       });
 
-      toast.success('Timetable saved successfully');
+      const res = await data.json();
+
+      console.log(res);
+
+      if(res.success) toast.success('Timetable saved successfully');
+      else            toast.error('Failed to save timetable');
     } catch (error) {
       toast.error('Failed to save timetable');
     } finally {

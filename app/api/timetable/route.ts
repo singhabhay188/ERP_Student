@@ -38,26 +38,21 @@ export async function POST(request: NextRequest) {
         update: {}
       });
 
-      // Create classes and update teacher timetables
-      for (const classData of classes) {
-        const { teacherId, ...classDetails } = classData
+      // add groupTimeTableId to each class
+      const newClasses = classes.map((classData) => {
+        return { ...classData, timetableId: groupTimetable.id }
+      });
 
-        // Create single class with just group timetable and teacher reference
-        const newClass = await tx.class.create({
-          data: {
-            ...classDetails,
-            timetableId: groupTimetable.id,  // Link to group's timetable
-            teacherId: teacherId             // Direct link to teacher
-          }
-        })
-      }
+      await tx.class.createMany({
+        data: newClasses
+      });
     })
 
-    return NextResponse.json({ message: 'Timetable updated successfully' })
+    return NextResponse.json({ success: true, message: 'Timetable updated successfully' })
   } catch (error) {
     console.error('Error updating timetable:', error)
     return NextResponse.json(
-      { error: 'Failed to update timetable' },
+      { success: false, error: 'Failed to update timetable' },
       { status: 500 }
     )
   }
