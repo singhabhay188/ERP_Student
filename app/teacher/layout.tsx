@@ -7,6 +7,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { CiLogout } from "react-icons/ci";
 
 const navItems = [
     { href: "/teacher/dashboard", label: "Dashboard", icon: MdDashboard },
@@ -17,6 +18,7 @@ const navItems = [
     { href: "/teacher/notices", label: "Notices", icon: FaPaperPlane },
     { href: "/teacher/calendar", label: "Academic Calendar", icon: FaCalendarAlt },
     { href: "/teacher/events", label: "Events", icon: MdOutlineEmojiEvents },
+    { href: "/logout", label: "Logout", icon: CiLogout }
   ];
   
 const TeacherSidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { TIME_SLOTS, WORKING_DAYS } from '@/utils/const'
 import { Group, Subject, Teacher } from '@/utils/types'
+import { formatTime } from '@/utils/formatTimeToIST';
 
 
 const createDateTime = (timeStr: string) => {
@@ -10,26 +11,6 @@ const createDateTime = (timeStr: string) => {
   const date = new Date(2000, 0, 1)
   date.setHours(hours, minutes, 0, 0)
   return date
-}
-
-const formatTimeAndIST = (sT: string, eT: string) => {
-  //India time = UTC + 5:30 ( 5.30 ghante aage than database time)
-  const startDate = new Date(sT);
-  const endDate = new Date(eT);
-  
-  startDate.setHours(startDate.getUTCHours() + 5);
-  startDate.setMinutes(startDate.getUTCMinutes() + 30);
-  endDate.setHours(endDate.getUTCHours() + 5);
-  endDate.setMinutes(endDate.getUTCMinutes() + 30);
-
-  // Format times to match TIME_SLOTS exactly
-  const startHour = startDate.getHours();
-  const endHour = endDate.getHours();
-
-  const startTime = `${startDate.getHours().toString().padStart(2, '0')}:${startDate.getMinutes().toString().padStart(2, '0')}`;
-  const endTime = `${endDate.getHours().toString().padStart(2, '0')}:${endDate.getMinutes().toString().padStart(2, '0')}`;
-
-  return {startTime, endTime}
 }
 
 const TimetablePage = () => {
@@ -87,7 +68,7 @@ const TimetablePage = () => {
   //         const formattedData: Record<string, Record<string, string>> = {}
           
   //         data.class.forEach((cls: any) => {
-  //           const {startTime, endTime} = formatTimeAndIST(cls.startTime, cls.endTime);
+  //           const {startTime, endTime} = formatTime(cls.startTime, cls.endTime);
 
   //           const timeKey = `${startTime}-${endTime}`;
             

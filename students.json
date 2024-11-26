@@ -1,0 +1,428 @@
+[
+    
+    {
+        "enrollment": "06125502721",
+        "name": "Yukta Verma",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "06225502721",
+        "name": "Sujeet Kumar",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "06325502721",
+        "name": "Pratham Agarwal",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "06425502721",
+        "name": "Mehul Anand",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "06525502721",
+        "name": "Arnav Nath",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "06625502721",
+        "name": "Ayush Thakur",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "06725502721",
+        "name": "Anugrah Joshi",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "06825502721",
+        "name": "Harsh Mahatha",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "06925502721",
+        "name": "Hardya Dixit",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07025502721",
+        "name": "Sargam Malhotra",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07125502721",
+        "name": "Ishaan Sharma",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07225502721",
+        "name": "Manshi Singh",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07325502721",
+        "name": "Sanskruti S Chaskar",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07425502721",
+        "name": "Arushi Dua",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07525502721",
+        "name": "Drishya Thekkumbad",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07625502721",
+        "name": "Riitik Bhardwaj",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07725502721",
+        "name": "Satya Kant Mishra",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "07925502721",
+        "name": "Divyam Hasija",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08025502721",
+        "name": "Yash Chhabra",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08125502721",
+        "name": "Satyajeet Sau",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08225502721",
+        "name": "Saurabh Prasad",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08325502721",
+        "name": "Sanya Rawat",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08425502721",
+        "name": "Bhavya Bhardwaj",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08525502721",
+        "name": "Shikha Jha",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08625502721",
+        "name": "Abhishek Jha",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08725502721",
+        "name": "Mahima",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08825502721",
+        "name": "Anjali Kukreti",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "08925502721",
+        "name": "Yahs Mehra",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "09025502721",
+        "name": "Pulkit Tehlan",
+        "groupId": "8e40d3ad-9741-4e9b-99fe-004fe748d938",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+
+
+
+
+    
+    {
+        "enrollment": "09125502721",
+        "name": "Jasleen Kaur",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "09225502721",
+        "name": "Ruby Malhotra",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "09425502721",
+        "name": "Prerna Jakhar",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "09625502721",
+        "name": "Shivam Aggarwal",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "09725502721",
+        "name": "Gaurav Pahwa",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "09825502721",
+        "name": "Vinayak Chauhan",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "09925502721",
+        "name": "Akshit Goel",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10025502721",
+        "name": "Arun Verma",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10125502721",
+        "name": "Dhruv Kumar",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10225502721",
+        "name": "Suraj Barik",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10325502721",
+        "name": "Abhay Singh Rawat",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10525502721",
+        "name": "Abhay Singh",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10625502721",
+        "name": "Nainika SIngh",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10725502721",
+        "name": "Ayushi Arya",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10825502721",
+        "name": "Mayank Pruthi",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "10925502721",
+        "name": "Nikhil Sethi",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11025502721",
+        "name": "Anurag Kumar",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11125502721",
+        "name": "Gautam Kapoor",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11225502721",
+        "name": "Megha Bhatt",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11325502721",
+        "name": "Chandan Batra",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11425502721",
+        "name": "Bhumi Bhatt",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11525502721",
+        "name": "Prason Jena",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11625502721",
+        "name": "Tanuja Pujari",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11725502721",
+        "name": "Rishi Ranjan",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11825502721",
+        "name": "Priyansh Pal",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "11925502721",
+        "name": "Nikhil Kumar",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "12025502721",
+        "name": "Nikhil Aswal",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "1125507222",
+        "name": "Naiyar Azam",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "325507222",
+        "name": "Darshh Chhabra",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "925507222",
+        "name": "Nikhil Mishra",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    },
+    {
+        "enrollment": "4125502721",
+        "name": "Dhruv Kumar",
+        "groupId": "c17962ce-e332-4b39-95a7-11fd8ba0bd2d",
+        "collegeId": "f0eced64-b793-4294-ae81-3c5352656098",
+        "imageUrl": "https://cdn-icons-png.flaticon.com/512/6858/6858504.png"
+    }
+]

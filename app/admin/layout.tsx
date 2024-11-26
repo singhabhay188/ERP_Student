@@ -8,6 +8,7 @@ import { IoIosTime } from "react-icons/io";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { CiLogout } from "react-icons/ci";
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: MdDashboard },
@@ -20,6 +21,7 @@ const navItems = [
   { href: "/admin/manageNotices", label: "Notices", icon: FaPaperPlane },
   { href: "/admin/calendar", label: "Academic Calendar", icon: FaCalendarAlt },
   { href: "/admin/manageEvents", label: "Events", icon: MdOutlineEmojiEvents },
+  { href: "/logout", label: "Logout", icon: CiLogout }
 ];
 
 const AdminSidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {

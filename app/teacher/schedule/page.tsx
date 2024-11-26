@@ -76,14 +76,16 @@ export default async function ClassSchedule() {
                     
                     return (
                       <td key={day} className="border p-2">
-                        {classForSlot && (
+                        {classForSlot ? (
                           <div className="text-sm">
                             <div className="font-semibold">{classForSlot.subject.title}</div>
-                            <div className="text-gray-600">
-                              {classForSlot.timetable.group?.section?.year?.course?.name} - 
-                              {classForSlot.timetable.group?.section?.name}
+                            <div className="text-gray-600 capitalize">
+                              {/* we have to create class detaills  */}
+                              {classForSlot.timetable.group?.section?.year?.course?.name} - {classForSlot.timetable.group?.section?.year?.course?.subname} - Sem {classForSlot.timetable.group?.section?.year?.semNum} - {classForSlot.timetable.group?.section?.name} - G{classForSlot.timetable?.group?.name}
                             </div>
                           </div>
+                        ) : (
+                          <div className="text-gray-400">-</div>
                         )}
                       </td>
                     )

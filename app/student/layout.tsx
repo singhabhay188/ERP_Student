@@ -1,6 +1,7 @@
 "use client";
 import { FaPaperPlane, FaCalendarAlt } from "react-icons/fa";
-import { MdDashboard, MdOutlineAssignment, MdOutlineEmojiEvents } from "react-icons/md";
+import { CiLogout } from "react-icons/ci";
+import { MdDashboard, MdOutlineAssignment, MdOutlineEmojiEvents} from "react-icons/md";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -11,6 +12,7 @@ const navItems = [
     { href: "/student/notices", label: "Notices", icon: FaPaperPlane },
     { href: "/student/calendar", label: "Academic Calendar", icon: FaCalendarAlt },
     { href: "/student/events", label: "Events", icon: MdOutlineEmojiEvents },
+    { href: "/logout", label: "Logout", icon: CiLogout },
   ];
   
 const TeacherSidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {

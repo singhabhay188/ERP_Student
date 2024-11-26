@@ -46,7 +46,9 @@ export default async function TeacherHome() {
         }
       }
     }
-  })
+  });
+
+  console.log(teacher?.classes);
 
   if (!teacher) {
     return <div className='p-8'>Teacher not found</div>
@@ -60,16 +62,18 @@ export default async function TeacherHome() {
       {/* Teacher Profile Section */}
       <div className="mb-8 bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center gap-6">
-          {teacher.imageUrl ? (
-            <img src={teacher.imageUrl} alt={teacher.name} width={64} height={64} className="rounded-full object-cover" />
-          ) : (
-            <div className="h-16 w-16 bg-gray-200 rounded-full flex items-center justify-center">
-              <span className="text-2xl">{teacher.name[0]}</span>
-            </div>
-          )}
+          <div className="h-16 w-16 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
+            {teacher.imageUrl ? (
+            <img src={teacher.imageUrl} alt={teacher.name} className="w-full h-full object-cover" />
+            ) : (
+              <span className="capitalize text-2xl">{teacher.name[0]}</span>
+            )}
+          </div>
+          
           <div>
             <h1 className="text-3xl capitalize font-bold">{teacher.name}</h1>
-            <p className="text-gray-600">Username: {teacher.username}</p>
+            <p className='text-gray-699'>College: {teacher.college.name}</p>
+            <p className="text-sm text-gray-600">Username: {teacher.username}</p>
           </div>
         </div>
       </div>
@@ -125,7 +129,7 @@ export default async function TeacherHome() {
                             <div className="font-semibold">{classForSlot.subject.title}</div>
                             <div className="text-gray-600 capitalize">
                               {/* we have to create class detaills  */}
-                              {classForSlot.timetable.group?.section?.year?.course?.name} - {classForSlot.timetable.group?.section?.year?.course?.subname} - {classForSlot.timetable.group?.section?.name} - G{classForSlot.timetable?.group?.name}
+                              {classForSlot.timetable.group?.section?.year?.course?.name} - {classForSlot.timetable.group?.section?.year?.course?.subname} - Sem {classForSlot.timetable.group?.section?.year?.semNum} - {classForSlot.timetable.group?.section?.name} - G{classForSlot.timetable?.group?.name}
                             </div>
                           </div>
                         ) : (

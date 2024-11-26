@@ -212,7 +212,8 @@ export async function createTeacher(data: TeacherFormData) {
                 name: data.name.toLowerCase(),
                 username: data.username.toLowerCase(),
                 password: data.password,
-                collegeId: data.collegeId
+                collegeId: data.collegeId,
+                imageUrl: data.imageUrl
             }
         });
 
