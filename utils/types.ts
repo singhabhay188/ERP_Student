@@ -45,4 +45,13 @@ export type Group = {
 export type Teacher = {
     id: string;
     name: string;
-} 
+}
+
+export type AssignmentFormData = {
+    title: string;
+    description: string;
+    dueDate: Date;
+    mediaUrl?: string;
+    groupId: string;
+    teacherId: string;
+}

@@ -12,7 +12,7 @@ async function getStudents() {
         include: {
             group: true
         },
-        take: 15
+        
     });
   
     return students;
