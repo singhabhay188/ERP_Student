@@ -29,7 +29,7 @@ export default function AddSubject() {
         <Drawer open={isOpen} onClose={handleClose}>
             <DrawerTrigger asChild>
                 <Button asChild onClick={handleOpen}>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center cursor-pointer">
                         <PlusCircle className="mr-2 h-4 w-4" /> Add New Subject
                     </div>
                 </Button>
