@@ -64,13 +64,9 @@ export default async function TodaysClasses() {
           let startTime = new Date(currentTime.toISOString().substring(0, 10) + cls.startTime.toISOString().substring(10));
           let endTime = new Date(currentTime.toISOString().substring(0, 10) + cls.endTime.toISOString().substring(10));
 
-          console.log(currentTime.toISOString().substring(0, 10), cls.startTime.toISOString().substring(10));
-
           const isPast = endTime < currentTime;
           const isCurrent = startTime <= currentTime && currentTime <= endTime;
           const isFuture = startTime > currentTime;
-
-          console.info(startTime, endTime, currentTime, isPast, isCurrent, isFuture);
 
           return (
 
