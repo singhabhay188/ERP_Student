@@ -1,6 +1,3 @@
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
-
 export default async function AcademicCalendar() {
   // Sample calendar events (in a real app, this would come from the database)
   const events = [

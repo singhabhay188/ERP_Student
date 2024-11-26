@@ -1,21 +1,10 @@
-import { cookies } from 'next/headers'
 import { format } from 'date-fns'
 import { WORKING_DAYS, TIME_SLOTS } from '@/utils/const'
-import { redirect } from 'next/navigation'
 import prisma from '@/db'
+import { getUserData } from '@/utils/auth';
 
 export default async function ClassSchedule() {
-  const cookieStore = await cookies()
-  const userCookie = cookieStore.get('user')
-  
-  if (!userCookie) {
-    redirect('/login')
-  }
-
-  const userData = JSON.parse(userCookie.value)
-  if (userData.type !== 'teacher') {
-    redirect('/')
-  }
+  const userData = await getUserData();
 
   const teacher = await prisma.teacher.findUnique({
     where: { id: userData.id },

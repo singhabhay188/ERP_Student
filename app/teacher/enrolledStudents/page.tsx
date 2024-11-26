@@ -1,19 +1,8 @@
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import prisma from '@/db'
+import { getUserData } from '@/utils/auth';
 
 export default async function EnrolledStudents() {
-  const cookieStore = await cookies()
-  const userCookie = cookieStore.get('user')
-  
-  if (!userCookie) {
-    redirect('/login')
-  }
-
-  const userData = JSON.parse(userCookie.value)
-  if (userData.type !== 'teacher') {
-    redirect('/')
-  }
+  const userData = await getUserData();
 
   // Get all unique students from the teacher's classes
   const classes = await prisma.class.findMany({
