@@ -1,22 +1,11 @@
-import { cookies } from 'next/headers'
 import { format } from 'date-fns'
 import { WORKING_DAYS, TIME_SLOTS, getTodayDay } from '@/utils/const'
-import { redirect } from 'next/navigation'
 import prisma from '@/db'
+import { getUserData } from '@/utils/auth'
 
 export default async function TeacherHome() {
-  const cookieStore = await cookies()
-  const userCookie = cookieStore.get('user')
+  const userData = await getUserData();
   // {"type":"teacher","id":"15a561fb-5913-47c4-b8d4-8b9e6c64de72"}
-  
-  if (!userCookie) {
-    redirect('/login')
-  }
-
-  const userData = JSON.parse(userCookie.value)
-  if (userData.type !== 'teacher') {
-    redirect('/')
-  }
 
   const teacher = await prisma.teacher.findUnique({
     where: { id: userData.id },
@@ -47,8 +36,6 @@ export default async function TeacherHome() {
       }
     }
   });
-
-  console.log(teacher?.classes);
 
   if (!teacher) {
     return <div className='p-8'>Teacher not found</div>
