@@ -91,6 +91,7 @@ export default function page() {
                     name="username"
                     placeholder="admin123" 
                     required
+                    defaultValue="admin@gmail.com"
                   />
                 </div>
                 <div className="space-y-1">
@@ -101,6 +102,7 @@ export default function page() {
                     type="password"
                     placeholder="*****" 
                     required
+                    defaultValue="admin123"
                   />
                 </div>
               </CardContent>
@@ -127,6 +129,7 @@ export default function page() {
                     name="username"
                     placeholder="david4455" 
                     required
+                    defaultValue="gaurav123"
                   />
                 </div>
                 <div className="space-y-1">
@@ -137,6 +140,7 @@ export default function page() {
                     type="password"
                     placeholder="*****" 
                     required
+                    defaultValue="gaurav123"
                   />
                 </div>
               </CardContent>
@@ -163,6 +167,7 @@ export default function page() {
                     name="enrollment"
                     placeholder="10525502721" 
                     required
+                    defaultValue="10525502721"
                   />
                 </div>
                 <div className="space-y-1">
@@ -173,6 +178,7 @@ export default function page() {
                     type="password"
                     placeholder="*****" 
                     required
+                    defaultValue="10525502721"
                   />
                 </div>
               </CardContent>

@@ -15,7 +15,7 @@ export default function AddAssignment({ teacherId } : { teacherId: string }) {
     useEffect(() => {
         const fetchGroups = async () => {
             try {
-                const response = await fetch('/api/groups'); // You'll need to create this API endpoint
+                const response = await fetch('/api/groups');
                 const data = await response.json();
                 setGroups(data);
             } catch (error) {

@@ -23,9 +23,6 @@ export default async function Notices() {
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Notices</h1>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          Create Notice
-        </button>
       </div>
 
       <div className="space-y-4">
@@ -51,10 +48,6 @@ export default async function Notices() {
               >
                 {notice.priority}
               </span>
-            </div>
-            <div className="mt-4 flex gap-2">
-              <button className="text-blue-500 hover:text-blue-700">Edit</button>
-              <button className="text-red-500 hover:text-red-700">Delete</button>
             </div>
           </div>
         ))}
